@@ -7,17 +7,21 @@ export class MyRoom extends Room<MyRoomState> {
   onCreate(options: any) {
     this.setState(new MyRoomState());
 
-    
+    this.onMessage(1, (client, message: {xc:number,yc:number }) => {
+      const player = this.state.players.get(client.sessionId);
+
+      player.x = message.xc;
+      player.y = message.yc;
+     
+    });
     
     // handle player input
     this.onMessage(0, (client, input) => {
       const player = this.state.players.get(client.sessionId);
-  
-      this.onMessage(1, (client, message: {xc:number,yc:number }) => {
-        player.x = message.xc;
-        player.y = message.yc;
-       
-      });
+
+
+
+      
       if (input.left && input.up) {
 
         player.animeState = "idle_left";
