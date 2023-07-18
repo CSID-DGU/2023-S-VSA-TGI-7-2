@@ -7,21 +7,19 @@ export class MyRoom extends Room<MyRoomState> {
   onCreate(options: any) {
     this.setState(new MyRoomState());
 
-    this.onMessage(1, (client, message: {xc:number,yc:number }) => {
+    this.onMessage(1, (client, message: {xc:number,yc:number }) => {//플레이어의 좌표정보를 받고 저장
       const player = this.state.players.get(client.sessionId);
 
-      player.x = message.xc;
+      player.x = message.xc;      //player.x player.y의 값이 바뀌면서 클라이언트의 player.onChange부분이 실행되면서 클라이언트로 좌표정보가 전달됨
       player.y = message.yc;
      
     });
+    
     
     // handle player input
     this.onMessage(0, (client, input) => {
       const player = this.state.players.get(client.sessionId);
 
-
-
-      
       if (input.left && input.up) {
 
         player.animeState = "idle_left";
