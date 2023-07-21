@@ -66,8 +66,8 @@ export class MyRoom extends Room<MyRoomState> {
 
     const player = new Player();
 
-    player.x = Math.random() * mapWidth;
-    player.y = Math.random() * mapHeight;
+    player.x = 650;
+    player.y = 430;
 
     this.state.players.set(client.sessionId, player);
   }
