@@ -6,6 +6,7 @@ export class Player extends Schema {
     @type("string") animeState: string;
     @type("number") velX: number;
     @type("number") velY: number;
+    @type("string") name: string;
 }
 
 export class MyRoomState extends Schema {
