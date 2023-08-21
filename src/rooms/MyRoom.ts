@@ -25,24 +25,46 @@ export class MyRoom extends Room<MyRoomState> {
     // handle player input
     this.onMessage(0, (client, input) => {
       const player = this.state.players.get(client.sessionId);
-
       if (input.left && input.up) {
+
         player.animeState = "idle_left";
       } else if (input.right && input.up) {
+
         player.animeState = "idle_right";
       } else if (input.left && input.down) {
+
         player.animeState = "idle_left";
       } else if (input.right && input.down) {
+
         player.animeState = "idle_right";
       } else if (input.left) {
+
         player.animeState = "idle_left";
       } else if (input.right) {
+
         player.animeState = "idle_right";
       } else if (input.up) {
+
         player.animeState = "idle_up";
       } else if (input.down) {
+
         player.animeState = "idle_down";
-      } else {
+      } else if (input == 'down') {
+
+        player.animeState = "sit_down";
+      }else if (input == 'left') {
+
+        player.animeState = "sit_left";
+      }else if (input == 'right') {
+
+        player.animeState = "sit_right";
+      }else if (input == 'up') {
+        
+        player.animeState = "sit_up";
+      }
+      else if (input == 'outofchair') {
+        
+        player.animeState = "idle_down";
       }
     });
 
