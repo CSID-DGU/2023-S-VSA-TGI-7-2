@@ -22,6 +22,11 @@ export class MyRoom extends Room<MyRoomState> {
       player.y = message.yc;
     });
 
+    this.onMessage(3, (client, message: { joined: String }) => {
+      this.broadcast("joined", { joined: message.joined });
+      console.log(message.joined);
+    });
+
     // handle player input
     this.onMessage(0, (client, input) => {
       const player = this.state.players.get(client.sessionId);
@@ -93,7 +98,8 @@ export class MyRoom extends Room<MyRoomState> {
 
   onLeave(client: Client, consented: boolean) {
     console.log(client.sessionId, "left!");
-
+    const player = this.state.players.get(client.sessionId);
+    this.broadcast("left", { left: player.name+ "님이 채팅방을 떠났습니다." });
     this.state.players.delete(client.sessionId);
   }
 
